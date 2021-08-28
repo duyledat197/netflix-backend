@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package Post;
+option go_package = "pb/;pb";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "model.proto";
+
+service PostService {
+	rpc CreatePost(CreatePostRequest) returns (CreatePostResponse) {
+	  option (google.api.http) = { post: "/v1/posts", body: "*" };
+	}
+
+    rpc GetPosts(GetPostsRequest) returns (GetPostsResponse) {
+        option (google.api.http) = { get: "/v1/posts" };
+    }
+
+    rpc GetPostDetail(GetPostDetailRequest) returns (GetPostDetailResponse) {
+        option (google.api.http) = { get: "/v1/posts/{postId}" };
+    }
+
+    rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse) {
+	  option (google.api.http) = { put: "/v1/posts/{postId}", body: "*" };
+	}
+
+    rpc DeletePost(DeletePostRequest) returns (DeletePostResponse) {
+	  option (google.api.http) = { delete: "/v1/posts/{postId}" };
+	}
+}
+
+
+
+message CreatePostRequest {
+    string content = 1;
+    string categoryId = 2;
+    string thumbnail = 3;
+    string describe = 4;
+}
+
+message CreatePostResponse {
+    bool success = 1;
+}
+
+message GetPostDetailRequest {
+    string postId = 1;
+}
+
+message GetPostDetailResponse {
+    string content = 1;
+    string categoryId = 2;
+    string thumbnail = 3;
+    string describe = 4;
+    int64 heartCount = 5;
+    int64 view = 6;
+    string createdAt = 7;
+}
+
+message GetPostsRequest {
+    int64 offset = 1;
+    int64 limit = 2;
+}
+
+message GetPostsResponse {
+    repeated GetPostDetailResponse posts = 1;
+}
+
+message UpdatePostRequest {
+    string postId = 1;
+
+     string content = 2;
+    string categoryId = 3;
+    string thumbnail = 4;
+    string describe = 5;
+}
+
+message UpdatePostResponse {
+    bool success = 1;
+}
+
+message DeletePostRequest {
+     string postId = 1;
+}
+
+message DeletePostResponse {
+    bool success = 1;
+}

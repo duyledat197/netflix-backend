@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package enum_pb;
+option go_package = "pb/;pb";
+
+enum UserRole {
+  UNKNOW = 0;
+  SUPER_ADMIN = 1;
+  ADMIN = 2;
+  USER = 3;
+}

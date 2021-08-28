@@ -1,0 +1,26 @@
+
+syntax = "proto3";
+
+package model;
+option go_package = "pb/;pb";
+
+message Answer {
+    string id = 1;
+    string createdBy = 2;
+    string answer = 3;
+    int64 upVote = 4;
+    int64 downVote = 5;
+
+    string createdAt = 6;
+}
+
+message Question {
+    string createdBy = 1;
+    string question = 2;
+    string categoryId = 3;
+    string heartCount = 4;
+    string answerCount = 5;
+    int64 upVote = 6;
+    int64 downVote = 7;
+    string createdAt = 8;
+}

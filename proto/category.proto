@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package category;
+option go_package = "pb/;pb";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "google/protobuf/empty.proto";
+
+service CategoryService {
+	rpc CreateCategory(CreateCategoryRequest) returns (CreateCategoryResponse) {
+	  option (google.api.http) = { post: "/v1/categories", body: "*" };
+	}
+
+    rpc GetListCategory(google.protobuf.Empty) returns (GetListCategoryResponse) {
+	  option (google.api.http) = { get: "/v1/categories" };
+	}
+
+    rpc GetPostsByCategoryId(GetPostsByCategoryIdRequest) returns (GetPostsByCategoryIdResponse) {
+	  option (google.api.http) = { get: "/v1/categories/{categoryId}/posts" };
+	}
+
+    rpc DeleteCategory(DeleteCategoryRequest) returns (DeleteCategoryResponse) {
+        option (google.api.http) = { delete: "/v1/categories/{categoryId}" };
+    }
+}
+
+message CreateCategoryRequest {
+    string name = 1; 
+}
+
+message CreateCategoryResponse {
+    string name = 1;
+    bool success = 2;
+}
+
+message Category {
+    string id = 1;
+    string name = 2;
+}
+
+message GetListCategoryResponse {
+    repeated Category categories = 1;
+    bool success = 2;
+}
+
+message GetPostsByCategoryIdRequest {
+    string categoryId = 1;
+}
+
+message GetPostsByCategoryIdResponse {
+    string categoryId = 1;
+    repeated Post Posts = 2;
+    bool success = 3;
+}
+
+message Post {
+    string content = 1;
+    string categoryId = 2;
+    string thumbnail = 3;
+    string describe = 4;
+    int64 heartCount = 5;
+    int64 view = 6;
+    string createdAt = 7;
+}
+
+message DeleteCategoryRequest {
+    string categoryId = 1;
+}
+message DeleteCategoryResponse {
+    bool success = 1;
+}

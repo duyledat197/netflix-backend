@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package auth;
+option go_package = "pb/;pb";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "enum.proto";
+
+service AuthService {
+	rpc Login(LoginRequest) returns (LoginResponse) {
+	  option (google.api.http) = { post: "/v1/auth/login", body: "*" };
+	}
+}
+
+message LoginRequest {
+    string email = 1 [(validate.rules).string.email = true];
+    string password = 2;
+}
+
+message LoginResponse {
+    string userID = 1;
+    string niceName = 2;
+    enum_pb.UserRole role = 3 [(validate.rules).enum.defined_only = true];
+    int64 commentCount = 4;
+    int64 postCount = 5;
+    string token = 6;
+}

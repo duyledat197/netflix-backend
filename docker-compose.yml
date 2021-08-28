@@ -1,0 +1,26 @@
+version: "3"
+services:
+  mongo:
+    image: mongo
+    container_name: qna-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data-db:/data/db
+      - ./seeders:/data/import
+  netflix-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "10010:10010"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_HOST=mongo
+      - GOOGLE_APPLICATION_CREDENTIALS=/bin/google_cloud_key.json
+volumes:
+  redis_dev_data:
+    external: false
+  mongodb-data-db:
+  seeders:
