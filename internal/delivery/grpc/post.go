@@ -32,6 +32,7 @@ func (d *postDelivery) CreatePost(ctx context.Context, req *pb.CreatePostRequest
 		CategoryID: categoryId,
 		Thumbnail:  req.Thumbnail,
 		Describe:   req.Describe,
+		Title:      req.Title,
 	}
 
 	if err := d.postDomain.Create(ctx, post); err != nil {
@@ -56,6 +57,7 @@ func (d *postDelivery) GetPosts(ctx context.Context, req *pb.GetPostsRequest) (*
 			HeartCount: v.HeartCount,
 			View:       v.View,
 			CreatedAt:  v.CreatedAt.Format(time.RFC3339),
+			Title:      v.Title,
 		})
 	}
 	return &pb.GetPostsResponse{
@@ -97,6 +99,7 @@ func (d *postDelivery) UpdatePost(ctx context.Context, req *pb.UpdatePostRequest
 		Content:    req.Content,
 		Thumbnail:  req.Thumbnail,
 		Describe:   req.Describe,
+		Title:      req.Title,
 	}); err != nil {
 		return nil, err
 	}

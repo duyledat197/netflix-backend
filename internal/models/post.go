@@ -8,6 +8,7 @@ import (
 
 type Post struct {
 	ID         primitive.ObjectID `bson:"_id,omitempty"`
+	Title      string             `bson:"title,omitempty"`
 	Content    string             `bson:"content,omitempty"`
 	CategoryID primitive.ObjectID `bson:"category_id,omitempty"`
 	Thumbnail  string             `bson:"thumbnail,omitempty"`

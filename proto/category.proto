@@ -62,6 +62,7 @@ message Post {
     int64 heartCount = 5;
     int64 view = 6;
     string createdAt = 7;
+    string title = 8;
 }
 
 message DeleteCategoryRequest {

@@ -503,6 +503,8 @@ func (m *Post) Validate() error {
 
 	// no validation rules for CreatedAt
 
+	// no validation rules for Title
+
 	return nil
 }
 

@@ -36,6 +36,7 @@ message CreatePostRequest {
     string categoryId = 2;
     string thumbnail = 3;
     string describe = 4;
+    string title = 5;
 }
 
 message CreatePostResponse {
@@ -54,6 +55,7 @@ message GetPostDetailResponse {
     int64 heartCount = 5;
     int64 view = 6;
     string createdAt = 7;
+    string title = 8;
 }
 
 message GetPostsRequest {
@@ -72,6 +74,7 @@ message UpdatePostRequest {
     string categoryId = 3;
     string thumbnail = 4;
     string describe = 5;
+    string title = 6;
 }
 
 message UpdatePostResponse {

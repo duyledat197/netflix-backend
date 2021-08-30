@@ -49,6 +49,8 @@ func (m *CreatePostRequest) Validate() error {
 
 	// no validation rules for Describe
 
+	// no validation rules for Title
+
 	return nil
 }
 
@@ -267,6 +269,8 @@ func (m *GetPostDetailResponse) Validate() error {
 	// no validation rules for View
 
 	// no validation rules for CreatedAt
+
+	// no validation rules for Title
 
 	return nil
 }
@@ -493,6 +497,8 @@ func (m *UpdatePostRequest) Validate() error {
 	// no validation rules for Thumbnail
 
 	// no validation rules for Describe
+
+	// no validation rules for Title
 
 	return nil
 }
