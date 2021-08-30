@@ -48,14 +48,13 @@ func UploadFile(bucket *storage.Bucket) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx := context.Background()
 		file, header, err := r.FormFile("file")
-		defer file.Close()
 		if err != nil {
 			log.Println("get file err", err)
 			responseWithJson(w, http.StatusBadRequest, map[string]interface{}{
 				"error": err.Error(),
 			})
 		}
-
+		defer file.Close()
 		fileName := header.Filename
 
 		link, err := bucket.UploadImage(ctx, file, fileName)
@@ -64,7 +63,7 @@ func UploadFile(bucket *storage.Bucket) http.Handler {
 				"error": err.Error(),
 			})
 		}
-		responseWithJson(w, http.StatusBadRequest, map[string]interface{}{
+		responseWithJson(w, http.StatusOK, map[string]interface{}{
 			"link": link,
 		})
 	})
