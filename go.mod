@@ -14,13 +14,12 @@ require (
 	github.com/kr/pretty v0.2.0 // indirect
 	github.com/o1egl/paseto v1.0.0
 	github.com/reddit/jwt-go v3.2.1+incompatible
+	github.com/rs/cors v1.8.0
 	github.com/stretchr/testify v1.6.1
 	github.com/urfave/cli v1.22.1
 	github.com/xdg/stringprep v1.0.0 // indirect
 	go.mongodb.org/mongo-driver v1.4.3
 	golang.org/x/crypto v0.0.0-20201124201722-c8d3bf9c5392
-	golang.org/x/oauth2 v0.0.0-20210615190721-d04028783cf1
-	google.golang.org/api v0.30.0
 	google.golang.org/genproto v0.0.0-20210617175327-b9e0b3197ced
 	google.golang.org/grpc v1.38.0
 	google.golang.org/protobuf v1.26.0

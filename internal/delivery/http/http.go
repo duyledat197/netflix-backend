@@ -10,6 +10,7 @@ import (
 	"github.com/duyledat197/netfix-backend/utils/storage"
 	"github.com/duyledat197/netfix-backend/utils/token"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/rs/cors"
 )
 
 // NewHTTPHandler ...
@@ -40,8 +41,7 @@ func NewHTTPHandler(
 	muxh := http.NewServeMux()
 	muxh.Handle("/", allowCORS(mux))
 	muxh.Handle("/v1/files", allowCORS(UploadFile(bucket)))
-
-	return muxh, nil
+	return cors.Default().Handler(muxh), nil
 }
 
 func UploadFile(bucket *storage.Bucket) http.Handler {
