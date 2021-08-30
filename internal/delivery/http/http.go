@@ -39,7 +39,7 @@ func NewHTTPHandler(
 	}
 	muxh := http.NewServeMux()
 	muxh.Handle("/", allowCORS(mux))
-	muxh.Handle("/files", UploadFile(bucket))
+	muxh.Handle("/v1/files", allowCORS(UploadFile(bucket)))
 
 	return muxh, nil
 }
