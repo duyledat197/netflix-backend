@@ -423,6 +423,8 @@ func (m *GetPostsResponse) Validate() error {
 
 	}
 
+	// no validation rules for Total
+
 	return nil
 }
 

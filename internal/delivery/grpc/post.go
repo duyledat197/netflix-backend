@@ -43,7 +43,7 @@ func (d *postDelivery) CreatePost(ctx context.Context, req *pb.CreatePostRequest
 	}, nil
 }
 func (d *postDelivery) GetPosts(ctx context.Context, req *pb.GetPostsRequest) (*pb.GetPostsResponse, error) {
-	list, err := d.postDomain.GetList(ctx, req.Offset, req.Limit)
+	list, total, err := d.postDomain.GetList(ctx, req.Offset, req.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -62,6 +62,7 @@ func (d *postDelivery) GetPosts(ctx context.Context, req *pb.GetPostsRequest) (*
 	}
 	return &pb.GetPostsResponse{
 		Posts: posts,
+		Total: total,
 	}, nil
 }
 func (d *postDelivery) GetPostDetail(ctx context.Context, req *pb.GetPostDetailRequest) (*pb.GetPostDetailResponse, error) {

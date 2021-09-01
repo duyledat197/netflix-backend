@@ -14,7 +14,7 @@ type PostDomain interface {
 	Create(ctx context.Context, post *models.Post) error
 	Update(ctx context.Context, post *models.Post) error
 	GetDetail(ctx context.Context, id primitive.ObjectID) (*models.Post, error)
-	GetList(ctx context.Context, offset, limit int64) ([]*models.Post, error)
+	GetList(ctx context.Context, offset, limit int64) ([]*models.Post, int64, error)
 	Delete(ctx context.Context, id primitive.ObjectID) error
 }
 
@@ -46,6 +46,14 @@ func (d *postDomain) Delete(ctx context.Context, id primitive.ObjectID) error {
 func (d *postDomain) GetDetail(ctx context.Context, id primitive.ObjectID) (*models.Post, error) {
 	return d.postRepository.FindByID(id)
 }
-func (d *postDomain) GetList(ctx context.Context, offset, limit int64) ([]*models.Post, error) {
-	return d.postRepository.FindAll(offset, limit, primitive.NilObjectID)
+func (d *postDomain) GetList(ctx context.Context, offset, limit int64) ([]*models.Post, int64, error) {
+	posts, err := d.postRepository.FindAll(offset, limit, primitive.NilObjectID)
+	if err != nil {
+		return nil, 0, err
+	}
+	total, err := d.postRepository.Count()
+	if err != nil {
+		return nil, 0, err
+	}
+	return posts, total, nil
 }

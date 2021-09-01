@@ -80,6 +80,7 @@ func (r *postRepository) FindAll(offset, limit int64, categoryID primitive.Objec
 	}
 	return results, nil
 }
+
 func (r *postRepository) Delete(id primitive.ObjectID) error {
 	ctx := context.Background()
 
@@ -87,4 +88,9 @@ func (r *postRepository) Delete(id primitive.ObjectID) error {
 		return err
 	}
 	return nil
+}
+
+func (r *postRepository) Count() (int64, error) {
+	ctx := context.Background()
+	return r.coll.CountDocuments(ctx, nil)
 }

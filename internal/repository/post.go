@@ -11,4 +11,5 @@ type PostRepository interface {
 	FindByID(id primitive.ObjectID) (*models.Post, error)
 	FindAll(offset, limit int64, categoryID primitive.ObjectID) ([]*models.Post, error)
 	Delete(id primitive.ObjectID) error
+	Count() (int64, error)
 }
