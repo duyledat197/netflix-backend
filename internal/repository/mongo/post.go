@@ -52,12 +52,16 @@ func (r *postRepository) FindByID(id primitive.ObjectID) (*models.Post, error) {
 func (r *postRepository) FindAll(offset, limit int64, categoryID primitive.ObjectID) ([]*models.Post, error) {
 	ctx := context.Background()
 	results := []*models.Post{}
-	otp := options.FindOptions{
-		Skip:  &offset,
-		Limit: &limit,
-	}
+	var otp options.FindOptions
 	if offset == 0 {
-		otp.Skip = nil
+		otp = options.FindOptions{
+			Limit: &limit,
+		}
+	} else {
+		otp = options.FindOptions{
+			Skip:  &offset,
+			Limit: &limit,
+		}
 	}
 	filter := bson.M{}
 	if !categoryID.IsZero() {
