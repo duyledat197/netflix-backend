@@ -53,7 +53,7 @@ func (r *postRepository) FindAll(offset, limit int64, categoryID primitive.Objec
 	ctx := context.Background()
 	results := []*models.Post{}
 	var otp options.FindOptions
-	if offset == 0 {
+	if offset <= 0 {
 		otp = options.FindOptions{
 			Limit: &limit,
 		}
