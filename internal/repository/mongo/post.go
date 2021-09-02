@@ -92,5 +92,5 @@ func (r *postRepository) Delete(id primitive.ObjectID) error {
 
 func (r *postRepository) Count() (int64, error) {
 	ctx := context.Background()
-	return r.coll.CountDocuments(ctx, nil)
+	return r.coll.CountDocuments(ctx, bson.D{})
 }
