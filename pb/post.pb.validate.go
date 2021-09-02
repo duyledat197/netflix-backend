@@ -272,6 +272,8 @@ func (m *GetPostDetailResponse) Validate() error {
 
 	// no validation rules for Title
 
+	// no validation rules for Id
+
 	return nil
 }
 

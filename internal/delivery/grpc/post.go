@@ -58,6 +58,7 @@ func (d *postDelivery) GetPosts(ctx context.Context, req *pb.GetPostsRequest) (*
 			View:       v.View,
 			CreatedAt:  v.CreatedAt.Format(time.RFC3339),
 			Title:      v.Title,
+			Id:         v.ID.Hex(),
 		})
 	}
 	return &pb.GetPostsResponse{
