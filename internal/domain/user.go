@@ -27,7 +27,7 @@ func NewUserDomain(userRepository repository.UserRepository) UserDomain {
 }
 
 func (d *userDomain) CreateUser(user *models.User) error {
-	return nil
+	return d.userRepository.Create(user)
 }
 
 func (d *userDomain) GetUserByEmail(email string) (*models.User, error) {

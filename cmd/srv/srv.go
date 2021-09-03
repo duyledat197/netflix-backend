@@ -52,6 +52,7 @@ type srv struct {
 	authDelivery     pb.AuthServiceServer
 	postDelivery     pb.PostServiceServer
 	categoryDelivery pb.CategoryServiceServer
+	userDelivery     pb.UserServiceServer
 
 	// define for logger
 }
@@ -95,7 +96,8 @@ func (s *srv) loadHTTPServer() error {
 	s.authDelivery = grpc.NewAuthDelivery(s.authDomain)
 	s.postDelivery = grpc.NewPostDelivery(s.postDomain)
 	s.categoryDelivery = grpc.NewCategoryDelivery(s.categoryDomain)
-	mux, err := httpS.NewHTTPHandler(ctx, s.authenticator, s.authDelivery, s.postDelivery, s.categoryDelivery, s.bucket)
+	s.userDelivery = grpc.NewUserDelivery(s.userDomain)
+	mux, err := httpS.NewHTTPHandler(ctx, s.authenticator, s.authDelivery, s.postDelivery, s.categoryDelivery, s.userDelivery, s.bucket)
 	if err != nil {
 		return err
 	}

@@ -1,14 +1,17 @@
 package errors
 
-import "google.golang.org/grpc"
+import (
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
+)
 
 var (
 	// ErrPasswordIsNotCorrect ...
-	ErrPasswordIsNotCorrect = grpc.Errorf(10001, "password is not correct")
+	ErrPasswordIsNotCorrect = status.Errorf(codes.InvalidArgument, "password is not correct")
 
 	// ErrEmailNotFound ...
-	ErrEmailNotFound = grpc.Errorf(10002, "email not found")
+	ErrEmailNotFound = status.Errorf(codes.InvalidArgument, "email not found")
 
 	// ErrEmailAlreadyExists ...
-	ErrEmailAlreadyExists = grpc.Errorf(10003, "email already exists")
+	ErrEmailAlreadyExists = status.Errorf(codes.AlreadyExists, "email already exists")
 )

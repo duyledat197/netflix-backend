@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package user;
+option go_package = "pb/;pb";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "enum.proto";
+
+service UserService {
+	rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
+	  option (google.api.http) = { post: "/v1/users", body: "*" };
+	}
+}
+
+message CreateUserRequest {
+    string email = 1 [(validate.rules).string.email = true];
+    string password = 2;
+    enum_pb.UserRole role = 3;
+}
+
+message CreateUserResponse {
+    bool success = 1;
+}

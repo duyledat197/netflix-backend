@@ -20,6 +20,7 @@ func NewHTTPHandler(
 	authpb pb.AuthServiceServer,
 	postpb pb.PostServiceServer,
 	categorypb pb.CategoryServiceServer,
+	userpb pb.UserServiceServer,
 	bucket *storage.Bucket,
 ) (http.Handler, error) {
 	mux := runtime.NewServeMux(
@@ -35,7 +36,12 @@ func NewHTTPHandler(
 	if err := pb.RegisterPostServiceHandlerServer(ctx, mux, postpb); err != nil {
 		return nil, err
 	}
+
 	if err := pb.RegisterCategoryServiceHandlerServer(ctx, mux, categorypb); err != nil {
+		return nil, err
+	}
+
+	if err := pb.RegisterUserServiceHandlerServer(ctx, mux, userpb); err != nil {
 		return nil, err
 	}
 	muxh := http.NewServeMux()

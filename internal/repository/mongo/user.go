@@ -18,12 +18,14 @@ type userRepository struct {
 
 func (r *userRepository) Create(user *models.User) error {
 	ctx := context.Background()
-	err := user.HashPassword()
-	if err != nil {
+
+	if err := user.HashPassword(); err != nil {
 		return err
 	}
-	_, err = r.coll.InsertOne(ctx, user)
-	return err
+	if _, err := r.coll.InsertOne(ctx, user); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (r *userRepository) UpdateInfo(userID string, user *models.User) error {
