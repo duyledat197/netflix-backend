@@ -9,6 +9,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/envoyproxy/protoc-gen-validate v0.1.0
 	github.com/golang/protobuf v1.5.2
+	github.com/gosimple/slug v1.10.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.5.0
 	github.com/klauspost/compress v1.9.8 // indirect
 	github.com/kr/pretty v0.2.0 // indirect

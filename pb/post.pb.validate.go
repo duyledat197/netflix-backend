@@ -187,7 +187,7 @@ func (m *GetPostDetailRequest) Validate() error {
 		return nil
 	}
 
-	// no validation rules for PostId
+	// no validation rules for Slug
 
 	return nil
 }
@@ -273,6 +273,8 @@ func (m *GetPostDetailResponse) Validate() error {
 	// no validation rules for Title
 
 	// no validation rules for Id
+
+	// no validation rules for Slug
 
 	return nil
 }

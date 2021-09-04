@@ -6,6 +6,7 @@ import (
 
 	"github.com/duyledat197/netfix-backend/internal/models"
 	"github.com/duyledat197/netfix-backend/internal/repository"
+	"github.com/gosimple/slug"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -13,7 +14,7 @@ import (
 type PostDomain interface {
 	Create(ctx context.Context, post *models.Post) error
 	Update(ctx context.Context, post *models.Post) error
-	GetDetail(ctx context.Context, id primitive.ObjectID) (*models.Post, error)
+	GetDetail(ctx context.Context, slug string) (*models.Post, error)
 	GetList(ctx context.Context, offset, limit int64) ([]*models.Post, int64, error)
 	Delete(ctx context.Context, id primitive.ObjectID) error
 }
@@ -33,6 +34,7 @@ func (d *postDomain) Create(ctx context.Context, post *models.Post) error {
 	post.CreatedAt = time.Now()
 	post.HeartCount = 0
 	post.View = 0
+	post.Slug = slug.Make(post.Title)
 	return d.postRepository.Create(post)
 }
 func (d *postDomain) Update(ctx context.Context, post *models.Post) error {
@@ -43,8 +45,8 @@ func (d *postDomain) Delete(ctx context.Context, id primitive.ObjectID) error {
 	return d.postRepository.Delete(id)
 }
 
-func (d *postDomain) GetDetail(ctx context.Context, id primitive.ObjectID) (*models.Post, error) {
-	return d.postRepository.FindByID(id)
+func (d *postDomain) GetDetail(ctx context.Context, slug string) (*models.Post, error) {
+	return d.postRepository.FindBySlug(slug)
 }
 func (d *postDomain) GetList(ctx context.Context, offset, limit int64) ([]*models.Post, int64, error) {
 	posts, err := d.postRepository.FindAll(offset, limit, primitive.NilObjectID)

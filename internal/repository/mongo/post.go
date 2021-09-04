@@ -36,6 +36,7 @@ func (r *postRepository) Update(id primitive.ObjectID, post *models.Post) error 
 	}, post)
 	return err
 }
+
 func (r *postRepository) FindByID(id primitive.ObjectID) (*models.Post, error) {
 	ctx := context.Background()
 	result := &models.Post{}
@@ -49,6 +50,20 @@ func (r *postRepository) FindByID(id primitive.ObjectID) (*models.Post, error) {
 	}
 	return result, nil
 }
+func (r *postRepository) FindBySlug(slug string) (*models.Post, error) {
+	ctx := context.Background()
+	result := &models.Post{}
+
+	if err := r.coll.
+		FindOne(ctx, &models.Post{
+			Slug: slug,
+		}).
+		Decode(&result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 func (r *postRepository) FindAll(offset, limit int64, categoryID primitive.ObjectID) ([]*models.Post, error) {
 	ctx := context.Background()
 	results := []*models.Post{}

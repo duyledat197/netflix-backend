@@ -112,14 +112,14 @@ func request_PostService_GetPostDetail_0(ctx context.Context, marshaler runtime.
 		_   = err
 	)
 
-	val, ok = pathParams["postId"]
+	val, ok = pathParams["slug"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "postId")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "slug")
 	}
 
-	protoReq.PostId, err = runtime.String(val)
+	protoReq.Slug, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "postId", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "slug", err)
 	}
 
 	msg, err := client.GetPostDetail(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -138,14 +138,14 @@ func local_request_PostService_GetPostDetail_0(ctx context.Context, marshaler ru
 		_   = err
 	)
 
-	val, ok = pathParams["postId"]
+	val, ok = pathParams["slug"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "postId")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "slug")
 	}
 
-	protoReq.PostId, err = runtime.String(val)
+	protoReq.Slug, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "postId", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "slug", err)
 	}
 
 	msg, err := server.GetPostDetail(ctx, &protoReq)
@@ -543,7 +543,7 @@ var (
 
 	pattern_PostService_GetPosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "posts"}, ""))
 
-	pattern_PostService_GetPostDetail_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "posts", "postId"}, ""))
+	pattern_PostService_GetPostDetail_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "posts", "slug"}, ""))
 
 	pattern_PostService_UpdatePost_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "posts", "postId"}, ""))
 

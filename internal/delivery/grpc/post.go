@@ -59,6 +59,7 @@ func (d *postDelivery) GetPosts(ctx context.Context, req *pb.GetPostsRequest) (*
 			CreatedAt:  v.CreatedAt.Format(time.RFC3339),
 			Title:      v.Title,
 			Id:         v.ID.Hex(),
+			Slug:       v.Slug,
 		})
 	}
 	return &pb.GetPostsResponse{
@@ -67,11 +68,8 @@ func (d *postDelivery) GetPosts(ctx context.Context, req *pb.GetPostsRequest) (*
 	}, nil
 }
 func (d *postDelivery) GetPostDetail(ctx context.Context, req *pb.GetPostDetailRequest) (*pb.GetPostDetailResponse, error) {
-	postID, err := primitive.ObjectIDFromHex(req.PostId)
-	if err != nil {
-		return nil, err
-	}
-	p, err := d.postDomain.GetDetail(ctx, postID)
+
+	p, err := d.postDomain.GetDetail(ctx, req.Slug)
 	if err != nil {
 		return nil, err
 	}
@@ -84,6 +82,7 @@ func (d *postDelivery) GetPostDetail(ctx context.Context, req *pb.GetPostDetailR
 		HeartCount: p.HeartCount,
 		View:       p.View,
 		CreatedAt:  p.CreatedAt.String(),
+		Slug:       p.Slug,
 	}, nil
 }
 func (d *postDelivery) UpdatePost(ctx context.Context, req *pb.UpdatePostRequest) (*pb.UpdatePostResponse, error) {

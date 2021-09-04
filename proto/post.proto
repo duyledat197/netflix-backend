@@ -17,7 +17,7 @@ service PostService {
     }
 
     rpc GetPostDetail(GetPostDetailRequest) returns (GetPostDetailResponse) {
-        option (google.api.http) = { get: "/v1/posts/{postId}" };
+        option (google.api.http) = { get: "/v1/posts/{slug}" };
     }
 
     rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse) {
@@ -44,7 +44,7 @@ message CreatePostResponse {
 }
 
 message GetPostDetailRequest {
-    string postId = 1;
+    string slug = 1;
 }
 
 message GetPostDetailResponse {
@@ -57,6 +57,7 @@ message GetPostDetailResponse {
     string createdAt = 7;
     string title = 8;
     string id = 9;
+    string slug = 10;
 }
 
 message GetPostsRequest {
