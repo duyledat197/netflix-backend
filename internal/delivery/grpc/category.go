@@ -6,6 +6,7 @@ import (
 	"github.com/duyledat197/netfix-backend/internal/domain"
 	"github.com/duyledat197/netfix-backend/internal/models"
 	"github.com/duyledat197/netfix-backend/pb"
+	"github.com/gosimple/slug"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
@@ -25,6 +26,7 @@ func NewCategoryDelivery(categoryDomain domain.CategoryDomain) pb.CategoryServic
 func (d *categoryDelivery) CreateCategory(ctx context.Context, req *pb.CreateCategoryRequest) (*pb.CreateCategoryResponse, error) {
 	if err := d.categoryDomain.Create(ctx, &models.Category{
 		Name: req.Name,
+		Slug: slug.Make(req.Name),
 	}); err != nil {
 		return nil, err
 	}
@@ -58,6 +60,7 @@ func (d *categoryDelivery) GetListCategory(ctx context.Context, req *emptypb.Emp
 		categories = append(categories, &pb.Category{
 			Id:   v.ID.Hex(),
 			Name: v.Name,
+			Slug: v.Slug,
 		})
 	}
 	return &pb.GetListCategoryResponse{

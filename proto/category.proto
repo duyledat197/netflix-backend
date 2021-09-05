@@ -16,8 +16,8 @@ service CategoryService {
 	  option (google.api.http) = { get: "/v1/categories" };
 	}
 
-    rpc GetPostsByCategoryId(GetPostsByCategoryIdRequest) returns (GetPostsByCategoryIdResponse) {
-	  option (google.api.http) = { get: "/v1/categories/{categoryId}/posts" };
+    rpc GetPostsBySlug(GetPostsBySlugRequest) returns (GetPostsBySlugResponse) {
+	  option (google.api.http) = { get: "/v1/categories/{slug}/posts" };
 	}
 
     rpc DeleteCategory(DeleteCategoryRequest) returns (DeleteCategoryResponse) {
@@ -37,6 +37,7 @@ message CreateCategoryResponse {
 message Category {
     string id = 1;
     string name = 2;
+    string slug = 3;
 }
 
 message GetListCategoryResponse {
@@ -44,19 +45,19 @@ message GetListCategoryResponse {
     bool success = 2;
 }
 
-message GetPostsByCategoryIdRequest {
-    string categoryId = 1;
+message GetPostsBySlugRequest {
+    string slug = 1;
 }
 
-message GetPostsByCategoryIdResponse {
-    string categoryId = 1;
+message GetPostsBySlugResponse {
+    string slug = 1;
     repeated Post Posts = 2;
     bool success = 3;
 }
 
 message Post {
     string content = 1;
-    string categoryId = 2;
+    string slug = 2;
     string thumbnail = 3;
     string describe = 4;
     int64 heartCount = 5;

@@ -184,6 +184,8 @@ func (m *Category) Validate() error {
 
 	// no validation rules for Name
 
+	// no validation rules for Slug
+
 	return nil
 }
 
@@ -325,23 +327,22 @@ var _ interface {
 	ErrorName() string
 } = GetListCategoryResponseValidationError{}
 
-// Validate checks the field values on GetPostsByCategoryIdRequest with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on GetPostsBySlugRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
-func (m *GetPostsByCategoryIdRequest) Validate() error {
+func (m *GetPostsBySlugRequest) Validate() error {
 	if m == nil {
 		return nil
 	}
 
-	// no validation rules for CategoryId
+	// no validation rules for Slug
 
 	return nil
 }
 
-// GetPostsByCategoryIdRequestValidationError is the validation error returned
-// by GetPostsByCategoryIdRequest.Validate if the designated constraints
-// aren't met.
-type GetPostsByCategoryIdRequestValidationError struct {
+// GetPostsBySlugRequestValidationError is the validation error returned by
+// GetPostsBySlugRequest.Validate if the designated constraints aren't met.
+type GetPostsBySlugRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -349,24 +350,24 @@ type GetPostsByCategoryIdRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetPostsByCategoryIdRequestValidationError) Field() string { return e.field }
+func (e GetPostsBySlugRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetPostsByCategoryIdRequestValidationError) Reason() string { return e.reason }
+func (e GetPostsBySlugRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetPostsByCategoryIdRequestValidationError) Cause() error { return e.cause }
+func (e GetPostsBySlugRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetPostsByCategoryIdRequestValidationError) Key() bool { return e.key }
+func (e GetPostsBySlugRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetPostsByCategoryIdRequestValidationError) ErrorName() string {
-	return "GetPostsByCategoryIdRequestValidationError"
+func (e GetPostsBySlugRequestValidationError) ErrorName() string {
+	return "GetPostsBySlugRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetPostsByCategoryIdRequestValidationError) Error() string {
+func (e GetPostsBySlugRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -378,14 +379,14 @@ func (e GetPostsByCategoryIdRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetPostsByCategoryIdRequest.%s: %s%s",
+		"invalid %sGetPostsBySlugRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetPostsByCategoryIdRequestValidationError{}
+var _ error = GetPostsBySlugRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -393,24 +394,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetPostsByCategoryIdRequestValidationError{}
+} = GetPostsBySlugRequestValidationError{}
 
-// Validate checks the field values on GetPostsByCategoryIdResponse with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on GetPostsBySlugResponse with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
-func (m *GetPostsByCategoryIdResponse) Validate() error {
+func (m *GetPostsBySlugResponse) Validate() error {
 	if m == nil {
 		return nil
 	}
 
-	// no validation rules for CategoryId
+	// no validation rules for Slug
 
 	for idx, item := range m.GetPosts() {
 		_, _ = idx, item
 
 		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return GetPostsByCategoryIdResponseValidationError{
+				return GetPostsBySlugResponseValidationError{
 					field:  fmt.Sprintf("Posts[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -425,10 +426,9 @@ func (m *GetPostsByCategoryIdResponse) Validate() error {
 	return nil
 }
 
-// GetPostsByCategoryIdResponseValidationError is the validation error returned
-// by GetPostsByCategoryIdResponse.Validate if the designated constraints
-// aren't met.
-type GetPostsByCategoryIdResponseValidationError struct {
+// GetPostsBySlugResponseValidationError is the validation error returned by
+// GetPostsBySlugResponse.Validate if the designated constraints aren't met.
+type GetPostsBySlugResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -436,24 +436,24 @@ type GetPostsByCategoryIdResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetPostsByCategoryIdResponseValidationError) Field() string { return e.field }
+func (e GetPostsBySlugResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetPostsByCategoryIdResponseValidationError) Reason() string { return e.reason }
+func (e GetPostsBySlugResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetPostsByCategoryIdResponseValidationError) Cause() error { return e.cause }
+func (e GetPostsBySlugResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetPostsByCategoryIdResponseValidationError) Key() bool { return e.key }
+func (e GetPostsBySlugResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetPostsByCategoryIdResponseValidationError) ErrorName() string {
-	return "GetPostsByCategoryIdResponseValidationError"
+func (e GetPostsBySlugResponseValidationError) ErrorName() string {
+	return "GetPostsBySlugResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetPostsByCategoryIdResponseValidationError) Error() string {
+func (e GetPostsBySlugResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -465,14 +465,14 @@ func (e GetPostsByCategoryIdResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetPostsByCategoryIdResponse.%s: %s%s",
+		"invalid %sGetPostsBySlugResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetPostsByCategoryIdResponseValidationError{}
+var _ error = GetPostsBySlugResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -480,7 +480,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetPostsByCategoryIdResponseValidationError{}
+} = GetPostsBySlugResponseValidationError{}
 
 // Validate checks the field values on Post with the rules defined in the proto
 // definition for this message. If any rules are violated, an error is returned.
@@ -491,7 +491,7 @@ func (m *Post) Validate() error {
 
 	// no validation rules for Content
 
-	// no validation rules for CategoryId
+	// no validation rules for Slug
 
 	// no validation rules for Thumbnail
 

@@ -21,7 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 type CategoryServiceClient interface {
 	CreateCategory(ctx context.Context, in *CreateCategoryRequest, opts ...grpc.CallOption) (*CreateCategoryResponse, error)
 	GetListCategory(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetListCategoryResponse, error)
-	GetPostsByCategoryId(ctx context.Context, in *GetPostsByCategoryIdRequest, opts ...grpc.CallOption) (*GetPostsByCategoryIdResponse, error)
+	GetPostsBySlug(ctx context.Context, in *GetPostsBySlugRequest, opts ...grpc.CallOption) (*GetPostsBySlugResponse, error)
 	DeleteCategory(ctx context.Context, in *DeleteCategoryRequest, opts ...grpc.CallOption) (*DeleteCategoryResponse, error)
 }
 
@@ -51,9 +51,9 @@ func (c *categoryServiceClient) GetListCategory(ctx context.Context, in *emptypb
 	return out, nil
 }
 
-func (c *categoryServiceClient) GetPostsByCategoryId(ctx context.Context, in *GetPostsByCategoryIdRequest, opts ...grpc.CallOption) (*GetPostsByCategoryIdResponse, error) {
-	out := new(GetPostsByCategoryIdResponse)
-	err := c.cc.Invoke(ctx, "/category.CategoryService/GetPostsByCategoryId", in, out, opts...)
+func (c *categoryServiceClient) GetPostsBySlug(ctx context.Context, in *GetPostsBySlugRequest, opts ...grpc.CallOption) (*GetPostsBySlugResponse, error) {
+	out := new(GetPostsBySlugResponse)
+	err := c.cc.Invoke(ctx, "/category.CategoryService/GetPostsBySlug", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ func (c *categoryServiceClient) DeleteCategory(ctx context.Context, in *DeleteCa
 type CategoryServiceServer interface {
 	CreateCategory(context.Context, *CreateCategoryRequest) (*CreateCategoryResponse, error)
 	GetListCategory(context.Context, *emptypb.Empty) (*GetListCategoryResponse, error)
-	GetPostsByCategoryId(context.Context, *GetPostsByCategoryIdRequest) (*GetPostsByCategoryIdResponse, error)
+	GetPostsBySlug(context.Context, *GetPostsBySlugRequest) (*GetPostsBySlugResponse, error)
 	DeleteCategory(context.Context, *DeleteCategoryRequest) (*DeleteCategoryResponse, error)
 	mustEmbedUnimplementedCategoryServiceServer()
 }
@@ -90,8 +90,8 @@ func (UnimplementedCategoryServiceServer) CreateCategory(context.Context, *Creat
 func (UnimplementedCategoryServiceServer) GetListCategory(context.Context, *emptypb.Empty) (*GetListCategoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetListCategory not implemented")
 }
-func (UnimplementedCategoryServiceServer) GetPostsByCategoryId(context.Context, *GetPostsByCategoryIdRequest) (*GetPostsByCategoryIdResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPostsByCategoryId not implemented")
+func (UnimplementedCategoryServiceServer) GetPostsBySlug(context.Context, *GetPostsBySlugRequest) (*GetPostsBySlugResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPostsBySlug not implemented")
 }
 func (UnimplementedCategoryServiceServer) DeleteCategory(context.Context, *DeleteCategoryRequest) (*DeleteCategoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCategory not implemented")
@@ -145,20 +145,20 @@ func _CategoryService_GetListCategory_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CategoryService_GetPostsByCategoryId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPostsByCategoryIdRequest)
+func _CategoryService_GetPostsBySlug_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPostsBySlugRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CategoryServiceServer).GetPostsByCategoryId(ctx, in)
+		return srv.(CategoryServiceServer).GetPostsBySlug(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/category.CategoryService/GetPostsByCategoryId",
+		FullMethod: "/category.CategoryService/GetPostsBySlug",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CategoryServiceServer).GetPostsByCategoryId(ctx, req.(*GetPostsByCategoryIdRequest))
+		return srv.(CategoryServiceServer).GetPostsBySlug(ctx, req.(*GetPostsBySlugRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -197,8 +197,8 @@ var CategoryService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _CategoryService_GetListCategory_Handler,
 		},
 		{
-			MethodName: "GetPostsByCategoryId",
-			Handler:    _CategoryService_GetPostsByCategoryId_Handler,
+			MethodName: "GetPostsBySlug",
+			Handler:    _CategoryService_GetPostsBySlug_Handler,
 		},
 		{
 			MethodName: "DeleteCategory",

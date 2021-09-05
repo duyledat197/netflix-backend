@@ -84,8 +84,8 @@ func local_request_CategoryService_GetListCategory_0(ctx context.Context, marsha
 
 }
 
-func request_CategoryService_GetPostsByCategoryId_0(ctx context.Context, marshaler runtime.Marshaler, client CategoryServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetPostsByCategoryIdRequest
+func request_CategoryService_GetPostsBySlug_0(ctx context.Context, marshaler runtime.Marshaler, client CategoryServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetPostsBySlugRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -95,23 +95,23 @@ func request_CategoryService_GetPostsByCategoryId_0(ctx context.Context, marshal
 		_   = err
 	)
 
-	val, ok = pathParams["categoryId"]
+	val, ok = pathParams["slug"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "categoryId")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "slug")
 	}
 
-	protoReq.CategoryId, err = runtime.String(val)
+	protoReq.Slug, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "categoryId", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "slug", err)
 	}
 
-	msg, err := client.GetPostsByCategoryId(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetPostsBySlug(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_CategoryService_GetPostsByCategoryId_0(ctx context.Context, marshaler runtime.Marshaler, server CategoryServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetPostsByCategoryIdRequest
+func local_request_CategoryService_GetPostsBySlug_0(ctx context.Context, marshaler runtime.Marshaler, server CategoryServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetPostsBySlugRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -121,17 +121,17 @@ func local_request_CategoryService_GetPostsByCategoryId_0(ctx context.Context, m
 		_   = err
 	)
 
-	val, ok = pathParams["categoryId"]
+	val, ok = pathParams["slug"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "categoryId")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "slug")
 	}
 
-	protoReq.CategoryId, err = runtime.String(val)
+	protoReq.Slug, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "categoryId", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "slug", err)
 	}
 
-	msg, err := server.GetPostsByCategoryId(ctx, &protoReq)
+	msg, err := server.GetPostsBySlug(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -240,18 +240,18 @@ func RegisterCategoryServiceHandlerServer(ctx context.Context, mux *runtime.Serv
 
 	})
 
-	mux.Handle("GET", pattern_CategoryService_GetPostsByCategoryId_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_CategoryService_GetPostsBySlug_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/category.CategoryService/GetPostsByCategoryId")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/category.CategoryService/GetPostsBySlug")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_CategoryService_GetPostsByCategoryId_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_CategoryService_GetPostsBySlug_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -259,7 +259,7 @@ func RegisterCategoryServiceHandlerServer(ctx context.Context, mux *runtime.Serv
 			return
 		}
 
-		forward_CategoryService_GetPostsByCategoryId_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_CategoryService_GetPostsBySlug_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -367,23 +367,23 @@ func RegisterCategoryServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 
 	})
 
-	mux.Handle("GET", pattern_CategoryService_GetPostsByCategoryId_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_CategoryService_GetPostsBySlug_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/category.CategoryService/GetPostsByCategoryId")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/category.CategoryService/GetPostsBySlug")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_CategoryService_GetPostsByCategoryId_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_CategoryService_GetPostsBySlug_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_CategoryService_GetPostsByCategoryId_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_CategoryService_GetPostsBySlug_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -415,7 +415,7 @@ var (
 
 	pattern_CategoryService_GetListCategory_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "categories"}, ""))
 
-	pattern_CategoryService_GetPostsByCategoryId_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "categories", "categoryId", "posts"}, ""))
+	pattern_CategoryService_GetPostsBySlug_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "categories", "slug", "posts"}, ""))
 
 	pattern_CategoryService_DeleteCategory_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "categories", "categoryId"}, ""))
 )
@@ -425,7 +425,7 @@ var (
 
 	forward_CategoryService_GetListCategory_0 = runtime.ForwardResponseMessage
 
-	forward_CategoryService_GetPostsByCategoryId_0 = runtime.ForwardResponseMessage
+	forward_CategoryService_GetPostsBySlug_0 = runtime.ForwardResponseMessage
 
 	forward_CategoryService_DeleteCategory_0 = runtime.ForwardResponseMessage
 )
