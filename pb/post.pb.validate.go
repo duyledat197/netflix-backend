@@ -276,6 +276,8 @@ func (m *GetPostDetailResponse) Validate() error {
 
 	// no validation rules for Slug
 
+	// no validation rules for CategorySlug
+
 	return nil
 }
 

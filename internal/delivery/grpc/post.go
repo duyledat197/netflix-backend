@@ -50,16 +50,17 @@ func (d *postDelivery) GetPosts(ctx context.Context, req *pb.GetPostsRequest) (*
 	var posts []*pb.GetPostDetailResponse
 	for _, v := range list {
 		posts = append(posts, &pb.GetPostDetailResponse{
-			Content:    v.Content,
-			Describe:   v.Describe,
-			Thumbnail:  v.Thumbnail,
-			CategoryId: v.CategoryID.Hex(),
-			HeartCount: v.HeartCount,
-			View:       v.View,
-			CreatedAt:  v.CreatedAt.Format(time.RFC3339),
-			Title:      v.Title,
-			Id:         v.ID.Hex(),
-			Slug:       v.Slug,
+			Content:      v.Content,
+			Describe:     v.Describe,
+			Thumbnail:    v.Thumbnail,
+			CategoryId:   v.CategoryID.Hex(),
+			HeartCount:   v.HeartCount,
+			View:         v.View,
+			CreatedAt:    v.CreatedAt.Format(time.RFC3339),
+			Title:        v.Title,
+			Id:           v.ID.Hex(),
+			Slug:         v.Slug,
+			CategorySlug: v.CategorySlug,
 		})
 	}
 	return &pb.GetPostsResponse{
@@ -75,14 +76,15 @@ func (d *postDelivery) GetPostDetail(ctx context.Context, req *pb.GetPostDetailR
 	}
 
 	return &pb.GetPostDetailResponse{
-		Content:    p.Content,
-		Describe:   p.Describe,
-		Thumbnail:  p.Thumbnail,
-		CategoryId: p.CategoryID.Hex(),
-		HeartCount: p.HeartCount,
-		View:       p.View,
-		CreatedAt:  p.CreatedAt.String(),
-		Slug:       p.Slug,
+		Content:      p.Content,
+		Describe:     p.Describe,
+		Thumbnail:    p.Thumbnail,
+		CategoryId:   p.CategoryID.Hex(),
+		HeartCount:   p.HeartCount,
+		View:         p.View,
+		CreatedAt:    p.CreatedAt.String(),
+		Slug:         p.Slug,
+		CategorySlug: p.CategorySlug,
 	}, nil
 }
 func (d *postDelivery) UpdatePost(ctx context.Context, req *pb.UpdatePostRequest) (*pb.UpdatePostResponse, error) {

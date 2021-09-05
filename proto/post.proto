@@ -58,6 +58,7 @@ message GetPostDetailResponse {
     string title = 8;
     string id = 9;
     string slug = 10;
+    string category_slug = 11;
 }
 
 message GetPostsRequest {

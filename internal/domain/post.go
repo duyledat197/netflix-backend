@@ -2,6 +2,7 @@ package domain
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/duyledat197/netfix-backend/internal/models"
@@ -20,21 +21,28 @@ type PostDomain interface {
 }
 
 type postDomain struct {
-	postRepository repository.PostRepository
+	postRepository     repository.PostRepository
+	categoryRepository repository.CategoryRepository
 }
 
 // NewPostDomain ...
-func NewPostDomain(postRepository repository.PostRepository) PostDomain {
+func NewPostDomain(postRepository repository.PostRepository, categoryRepository repository.CategoryRepository) PostDomain {
 	return &postDomain{
-		postRepository: postRepository,
+		postRepository:     postRepository,
+		categoryRepository: categoryRepository,
 	}
 }
 
 func (d *postDomain) Create(ctx context.Context, post *models.Post) error {
+	c, err := d.categoryRepository.FindByID(post.CategoryID)
+	if err != nil {
+		return fmt.Errorf("category not exists")
+	}
 	post.CreatedAt = time.Now()
 	post.HeartCount = 0
 	post.View = 0
 	post.Slug = slug.Make(post.Title)
+	post.CategorySlug = c.Slug
 	return d.postRepository.Create(post)
 }
 func (d *postDomain) Update(ctx context.Context, post *models.Post) error {

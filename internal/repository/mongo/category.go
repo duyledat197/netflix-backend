@@ -59,3 +59,17 @@ func (r *categoryRepository) FindAll() ([]*models.Category, error) {
 	}
 	return results, nil
 }
+
+func (r *categoryRepository) FindByID(id primitive.ObjectID) (*models.Category, error) {
+	ctx := context.Background()
+	result := &models.Category{}
+
+	if err := r.coll.
+		FindOne(ctx, &models.Category{
+			ID: id,
+		}).
+		Decode(&result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}

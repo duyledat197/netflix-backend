@@ -8,5 +8,6 @@ import (
 type CategoryRepository interface {
 	Create(category *models.Category) error
 	FindAll() ([]*models.Category, error)
+	FindByID(id primitive.ObjectID) (*models.Category, error)
 	Delete(id primitive.ObjectID) error
 }

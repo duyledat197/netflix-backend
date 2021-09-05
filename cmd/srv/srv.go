@@ -80,7 +80,7 @@ func (s *srv) loadRepository() error {
 func (s *srv) loadDomain() error {
 	s.userDomain = domain.NewUserDomain(s.userRepository)
 	s.authDomain = domain.NewAuthDomain(s.userRepository, s.authenticator)
-	s.postDomain = domain.NewPostDomain(s.postRepository)
+	s.postDomain = domain.NewPostDomain(s.postRepository, s.categoryRepository)
 	s.categoryDomain = domain.NewCategoryDomain(s.categoryRepository)
 	return nil
 }
