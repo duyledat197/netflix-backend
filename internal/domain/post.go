@@ -43,6 +43,7 @@ func (d *postDomain) Create(ctx context.Context, post *models.Post) error {
 	post.View = 0
 	post.Slug = slug.Make(post.Title)
 	post.CategorySlug = c.Slug
+	post.CategoryName = c.Name
 	return d.postRepository.Create(post)
 }
 func (d *postDomain) Update(ctx context.Context, post *models.Post) error {

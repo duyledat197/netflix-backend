@@ -61,6 +61,7 @@ func (d *postDelivery) GetPosts(ctx context.Context, req *pb.GetPostsRequest) (*
 			Id:           v.ID.Hex(),
 			Slug:         v.Slug,
 			CategorySlug: v.CategorySlug,
+			CategoryName: v.CategoryName,
 		})
 	}
 	return &pb.GetPostsResponse{

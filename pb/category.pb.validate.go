@@ -423,6 +423,8 @@ func (m *GetPostsBySlugResponse) Validate() error {
 
 	// no validation rules for Success
 
+	// no validation rules for Name
+
 	return nil
 }
 

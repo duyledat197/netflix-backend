@@ -13,6 +13,7 @@ type Post struct {
 	Title        string             `bson:"title,omitempty"`
 	Content      string             `bson:"content,omitempty"`
 	CategoryID   primitive.ObjectID `bson:"category_id,omitempty"`
+	CategoryName string             `bson:"category_name,omitempty"`
 	Thumbnail    string             `bson:"thumbnail,omitempty"`
 	Describe     string             `bson:"describe,omitempty"`
 	HeartCount   int64              `bson:"heart_count,omitempty"`

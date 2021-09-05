@@ -53,6 +53,7 @@ message GetPostsBySlugResponse {
     string slug = 1;
     repeated Post Posts = 2;
     bool success = 3;
+    string name = 4;
 }
 
 message Post {
