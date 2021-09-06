@@ -71,6 +71,9 @@ func (r *postRepository) FindAll(offset, limit int64, categoryID primitive.Objec
 	if offset <= 0 {
 		otp = options.FindOptions{
 			Limit: &limit,
+			Sort: bson.M{
+				"created_at": -1,
+			},
 		}
 	} else {
 		otp = options.FindOptions{
