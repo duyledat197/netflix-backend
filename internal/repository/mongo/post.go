@@ -31,11 +31,12 @@ func (r *postRepository) Create(post *models.Post) error {
 
 func (r *postRepository) Update(id primitive.ObjectID, post *models.Post) error {
 	ctx := context.Background()
-	_, err := r.coll.UpdateOne(ctx, bson.M{
-		"$set": &models.Post{
-			ID: id,
-		},
-	}, post)
+	_, err := r.coll.UpdateOne(ctx, &models.Post{
+		ID: id,
+	},
+		bson.M{
+			"$set": post,
+		})
 	return err
 }
 
