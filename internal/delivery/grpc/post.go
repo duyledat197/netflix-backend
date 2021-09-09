@@ -77,6 +77,9 @@ func (d *postDelivery) GetPostDetail(ctx context.Context, req *pb.GetPostDetailR
 	}
 
 	return &pb.GetPostDetailResponse{
+		Id:           p.ID.Hex(),
+		Title:        p.Title,
+		CategoryName: p.CategoryName,
 		Content:      p.Content,
 		Describe:     p.Describe,
 		Thumbnail:    p.Thumbnail,
